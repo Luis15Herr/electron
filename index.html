@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/luis.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="js/datapicker/flatpickr.min.css">
+    <script src="js/datapicker/flatpickr.js"></script>
+</head>
+<!--<body onload="displayLogin();">-->
+<body>
+<!-- Modal de inicio de sesión -->
+<div class="modal fade show login-modal d-none" id="ModalLogin" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <h4 class="d-block">Sistema de información para el control <br> de ingreso y egreso de los estudiantes de 5to año de la U.E.P San Leonardo Murialdo</h4>
+                <h5 class="modal-title" id="ModalLoginTitle">Iniciar sesión</h5>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <img src="img/Logo.jpeg" alt="">
+                </div>
+                <form>
+                    <div class="login-field">
+                        <label for="UserInput">Usuario</label>
+                        <input class="form-control" type="text" name="user" id="UserInput" placeholder="Usuario"
+                               required>
+                    </div>
+                    <div class="login-field">
+                        <label for="PwdInput">Contraseña</label>
+                        <input class="form-control" type="password" name="password" id="PwdInput"
+                               placeholder="Contraseña" required>
+                    </div>
+                    <div class="text-left">
+                        <span class="loginAlert d-none loginAlertC">Alguno de los campos esta vacio.</span>
+                        <span class="loginAlert d-none loginAlertP">Contraseña invalida.</span>
+                        <span class="loginAlert d-none loginAlertU">Usuario invalido.</span>
+                    </div>
+                    <div class="text-center">
+                        <a class="btn btn-primary" onclick="hideLogin()" id="Login">Entrar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Aplicacion Principal -->
+    <div class="main-app" id="MainApp" style="">
+        <div class="row">
+            <div class="col-sm">
+                <div class="info-school text-center">
+                    <img src="img/Logo.jpeg" alt="">
+                    <span>U.E.P San Leonardo Murialdo</span>
+                </div>
+                <div class="border-padding"></div>
+                <div class="app-btns">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-student">
+                        Añadir estudiante a la seccion
+                    </button>
+                    <div class="modal fade bd-example-modal-lg" id="add-student" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <form id="addStudent">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Añadir Estudiante</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-6 ml-auto">
+                                                        <div class="form-group">
+                                                            <label for="newStudentNames">Nombres</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="newStudentNames"
+                                                                   placeholder="Escribe los nombres del estudiante"
+                                                                   required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="newStudentLastnames">Apellidos</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="newStudentLastnames"
+                                                                   placeholder="Escribe los apellidos del estudiante"
+                                                                   required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 ml-auto">
+                                                        <div class="form-group">
+                                                            <label for="newStudentId">Cédula de
+                                                                Identidad</label>
+                                                            <input type="number" class="form-control"
+                                                                   id="newStudentId"
+                                                                   placeholder="Ingrese la cédula del estudiante"
+                                                                   required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="flatpickr">Fecha de
+                                                                nacimiento</label>
+                                                            <div class='input-group date'>
+                                                                <div class="flatpickr-wrapper"><input id="flatpickr"
+                                                                                                      placeholder="Introduce fecha"
+                                                                                                      class="form-control">
+                                                                    <div class="flatpickr-calendar">
+                                                                        <div class="flatpickr-months"><span
+                                                                                class="flatpickr-prev-month">&lt;</span><span
+                                                                                class="flatpickr-next-month">&gt;</span><span
+                                                                                class="flatpickr-current-month"><span>March</span> 2020</span>
+                                                                        </div>
+                                                                        <table>
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th>Sun</th>
+                                                                                <th>Mon</th>
+                                                                                <th>Tue</th>
+                                                                                <th>Wed</th>
+                                                                                <th>Thu</th>
+                                                                                <th>Fri</th>
+                                                                                <th>Sat</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">1</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">2</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">3</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">4</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">5</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">6</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">7</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">8</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">9</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">10</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">11</span>
+                                                                                </td>
+                                                                                <td class=" today slot"><span
+                                                                                        class="flatpickr-day">12</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">13</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">14</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">15</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">16</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">17</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">18</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">19</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">20</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">21</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">22</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">23</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">24</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">25</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">26</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">27</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">28</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">29</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">30</span>
+                                                                                </td>
+                                                                                <td class=" slot"><span
+                                                                                        class="flatpickr-day">31</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                                <span class="input-group-addon button"
+                                                                      style="display: inline-block; cursor: pointer;"
+                                                                      onclick="dP();">
+                                                            </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group" required>
+                                                            <label for="formGroupExampleInput2">Sexo</label>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="inlineRadioOptions" id="newStudentGenderM"
+                                                                       value="option1">
+                                                                <label class="form-check-label" for="newStudentGenderM">Masculino</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                       name="inlineRadioOptions" id="newStudentGenderF"
+                                                                       value="option2">
+                                                                <label class="form-check-label" for="newStudentGenderF">Femenino</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                data-target="#discard">Descartar
+                                        </button>
+                                        <button class="btn btn-primary" type="submit" data-toggle="modal"
+                                                data-target="#success"
+                                        >Añadir Estudiante
+                                        </button>
+
+                                        <div class="modal fade" id="discard" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="text-center"><h5>¿Descartar cambios?</h5>
+                                                            <div class="swal2-icon swal2-error swal2-animate-error-icon"
+                                                                 style="display: flex;"><span class="swal2-x-mark"><span
+                                                                    class="swal2-x-mark-line-left"></span><span
+                                                                    class="swal2-x-mark-line-right"></span></span></div>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <button class="btn btn-secondary" onclick="discardChange()">
+                                                                Cancelar
+                                                            </button>
+                                                            <button class="btn btn-danger" data-dismiss="modal"
+                                                                    onclick="discardChangeSure()">Si, seguro
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal fade" id="success" tabindex="-1" role="dialog"
+                                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="text-center"><h5>Operacion realizada con exito</h5>
+                                                        </div>
+                                                        <div class="success-checkmark">
+                                                            <div class="check-icon">
+                                                                <span class="icon-line line-tip"></span>
+                                                                <span class="icon-line line-long"></span>
+                                                                <div class="icon-circle"></div>
+                                                                <div class="icon-fix"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary"
+                                                                data-dismiss="modal">
+                                                            Continuar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+<!--ELIMINAR ESTUDIANTE-->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#less-student">
+                        Egresar estudiante de la seccion
+                    </button>
+                    <div class="modal fade bd-example-modal-lg" id="less-student" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Egresar Estudiante</h5>
+                                    <button onclick="clearStudents()" type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12 ml-auto">
+                                                    <form>
+                                                        <div class="form-group">
+                                                            <label for="formGroupExampleInput">Introduce cedula del
+                                                                estudiante a egresar de la institucion</label>
+                                                            <input type="text" class="form-control"
+                                                                   id="lessId"
+                                                                   placeholder="Cedula">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                            onclick="clearStudents()">Descartar
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#less2-student" onclick="deleteStudents($('#lessId').val())">
+                                        Egresar estudiante
+                                    </button>
+                                    <div class="modal fade bd-example-modal-lg" id="less2-student" tabindex="-1"
+                                         role="dialog"
+                                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Planilla de
+                                                        egreso</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close" onclick="clearStudents()">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="modal-body">
+                                                        <div class="container-fluid">
+                                                            <div class="row" id="lessStudentForm">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button onclick="clearStudents()" type="button"
+                                                            class="btn btn-secondary"
+                                                            data-dismiss="modal">Descartar
+                                                    </button>
+                                                    <button onclick="lessStudent($('#lessId').val())"
+                                                            class="btn btn-primary" type="submit"
+                                                            data-toggle="modal" data-target="#deletedComplete">Eliminar
+                                                        estudiante de la base de datos
+                                                    </button>
+                                                    <div class="modal fade" id="deletedComplete" tabindex="-1"
+                                                         role="dialog"
+                                                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close"
+                                                                            data-dismiss="modal"
+                                                                            aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="text-center"><h5>Operacion realizada con
+                                                                        exito</h5>
+                                                                    </div>
+                                                                    <div class="success-checkmark">
+                                                                        <div class="check-icon">
+                                                                            <span class="icon-line line-tip"></span>
+                                                                            <span class="icon-line line-long"></span>
+                                                                            <div class="icon-circle"></div>
+                                                                            <div class="icon-fix"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-primary"
+                                                                            data-dismiss="modal">
+                                                                        Continuar
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--INFORMACION ESTUDIANTE-->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#info-student">
+                        Informacion de estudiante
+                    </button>
+                    <div class="modal fade bd-example-modal-lg" id="info-student" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Informacion Estudiante</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12 ml-auto">
+
+                                                    <div class="form-group">
+                                                        <label for="formGroupExampleInput">Introduce cedula del
+                                                            estudiante</label>
+                                                        <input type="text" class="form-control"
+                                                               id="infoId"
+                                                               placeholder="Cedula">
+                                                    </div>
+                                                </div>
+                                                <div class="container-fluid">
+                                                    <div class="row" id="infoStudentForm">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary"
+                                            onclick="showInfo($('#infoId').val())">Buscar
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" onclick="closeInfo()"
+                                            data-dismiss="modal">Cerrar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--LIMPIAR LOCAL STORAGE-->
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#clearData">Limpiar toda la base de datos</button>
+                    <div class="modal fade" id="clearData" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Estas seguro de querer limpiar la base de datos? </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12 ml-auto">
+
+                                                    <div class="form-group dataClearContainer" >
+                                                        <p >Se <span class="text-danger">eliminaran todos los datos</span>, fechas de nacimiento, cedulas y nombres.</p>
+                                                        <p>El sistema quedara <span class="text-danger">vacio</span> por completo.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary"
+                                    data-dismiss="modal">Cancelar
+                                    </button>
+                                    <button class="btn btn-danger" type="submit"
+                                            data-toggle="modal" data-target="#clearComplete"onclick="clearData()">Si, deseo continuar
+                                    </button>
+                                    <div class="modal fade" id="clearComplete" tabindex="-1"
+                                         role="dialog"
+                                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close"
+                                                            data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="text-center"><h5>Operacion realizada con
+                                                        exito</h5>
+                                                    </div>
+                                                    <div class="success-checkmark">
+                                                        <div class="check-icon">
+                                                            <span class="icon-line line-tip"></span>
+                                                            <span class="icon-line line-long"></span>
+                                                            <div class="icon-circle"></div>
+                                                            <div class="icon-fix"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary"
+                                                            data-dismiss="modal">
+                                                        Continuar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="students-added">
+                    <h5>Estudiantes añadidos</h5>
+                    <div class="list-students">
+                        <table class="table table-striped" id="addedStudentsList">
+                            <thead class="thead-dark ">
+                            <tr>
+                                <th scope="col" class="d-none">#</th>
+                                <th scope="col">Cedula</th>
+                                <th scope="col">Nombre y Apellido</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row" class="d-none">1</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="border-padding"></div>
+                <div class="students-lessed">
+                    <h5>Estudiantes egresados </h5>
+                    <div class="list-students">
+                        <table class="table table-striped" id="lessedStudentsList">
+                            <thead class="thead-dark ">
+                            <tr>
+                                <th scope="col" class="d-none">#</th>
+                                <th scope="col">Cedula</th>
+                                <th scope="col">Nombre y Apellido</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row" class="d-none">1</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="actual-students">
+                    <h5>Estudiantes actuales </h5>
+                    <div class="list-students">
+                        <table class="table table-striped" id="actualStudentsList">
+                            <thead class="thead-dark ">
+                            <tr>
+                                <th scope="col" class="d-none">#</th>
+                                <th scope="col">Cedula</th>
+                                <th scope="col">Nombre y Apellido</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row" class="d-none">1</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<footer>
+    <script type="text/javascript" src="js/jquery-3.4.1.slim.min.js"></script>
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/js.js"></script>
+    <script type="text/javascript">
+    </script>
+</footer>
+</html>
+
